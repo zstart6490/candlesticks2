@@ -83,7 +83,8 @@ class _TimeRowState extends State<TimeRow> {
   }
 
   String dateFormatter(DateTime date) {
-    return "${date.year}-${numberFormat(date.month)}-${numberFormat(date.day)} ${numberFormat(date.hour)}:${numberFormat(date.minute)}";
+    //return "${date.year}-${numberFormat(date.month)}-${numberFormat(date.day)} ${numberFormat(date.hour)}:${numberFormat(date.minute)}";
+    return "${numberFormat(date.day)}/${numberFormat(date.month)}/${date.year}";
   }
 
   @override
@@ -127,14 +128,14 @@ class _TimeRowState extends State<TimeRow> {
                       color: Theme.of(context).grayColor,
                     ),
                   ),
-                  // _monthDayText(
-                  //     _time, Theme.of(context).scaleNumbersColor)
+                  _monthDayText(
+                      _time, Theme.of(context).scaleNumbersColor)
 
-                  dif.compareTo(Duration(days: 1)) > 0
-                      ? _monthDayText(
-                          _time, Theme.of(context).scaleNumbersColor)
-                      : _hourMinuteText(
-                          _time, Theme.of(context).scaleNumbersColor),
+                  // dif.compareTo(Duration(days: 1)) > 0
+                  //     ? _monthDayText(
+                  //         _time, Theme.of(context).scaleNumbersColor)
+                  //     : _hourMinuteText(
+                  //         _time, Theme.of(context).scaleNumbersColor),
                 ],
               );
             },
@@ -145,6 +146,7 @@ class _TimeRowState extends State<TimeRow> {
                   bottom: 0,
                   left: math.max(widget.indicatorX! - 55, 0),
                   child: Container(
+                    padding:EdgeInsets.symmetric(vertical: 2, horizontal: 4) ,
                     color: Theme.of(context).hoverIndicatorBackgroundColor,
                     child: Center(
                       child: Text(
@@ -153,10 +155,10 @@ class _TimeRowState extends State<TimeRow> {
                           color: Theme.of(context).hoverIndicatorTextColor,
                           fontSize: 14,
                         ),
+                        textAlign: TextAlign.center,
                       ),
                     ),
-                    width: 110,
-                    height: 20,
+                    //width: 90,
                   ),
                 ),
         ],

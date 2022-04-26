@@ -163,7 +163,6 @@ class _MobileChartState extends State<MobileChart> {
                         indicatorTime: currentCandle?.date,
                         index: widget.index,
                       ),
-
                       Column(
                         children: [
                           Expanded(
@@ -310,34 +309,35 @@ class _MobileChartState extends State<MobileChart> {
                                     thickness: 0.5,
                                   ),
                                   Container(
-                                    color: Theme.of(context).hoverIndicatorBackgroundColor,
-                                    child: Center(
+                                    padding:EdgeInsets.symmetric(vertical: 2),
+                                    color: Theme.of(context)
+                                        .hoverIndicatorBackgroundColor,
                                       child: Text(
                                         longPressY! < maxHeight * 1
-                                            ? HelperFunctions.priceToString(
+                                            ? "  ${HelperFunctions.priceToString(
                                                 high -
                                                     (longPressY! - 20) /
-                                                        (maxHeight * 1 -
-                                                            40) *
-                                                        (high - low))
-                                            : HelperFunctions.addMetricPrefix(
+                                                        (maxHeight * 1 - 40) *
+                                                        (high - low))}"
+                                            : "  ${HelperFunctions.addMetricPrefix(
                                                 HelperFunctions.getRoof(
                                                         volumeHigh) *
                                                     (1 -
                                                         (longPressY! -
-                                                                maxHeight *
-                                                                    1 -
+                                                                maxHeight * 1 -
                                                                 10) /
                                                             (maxHeight * 0 -
-                                                                10))),
+                                                                10)))}",
                                         style: TextStyle(
-                                          color: Theme.of(context).hoverIndicatorTextColor,
-                                          fontSize: 12,
+                                          color: Theme.of(context)
+                                              .hoverIndicatorTextColor,
+                                          fontSize: 14,
                                         ),
+                                        textAlign: TextAlign.left,
                                       ),
-                                    ),
+
                                     width: PRICE_BAR_WIDTH,
-                                    height: 20,
+
                                   ),
                                 ],
                               ),
