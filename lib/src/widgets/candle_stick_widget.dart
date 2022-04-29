@@ -142,8 +142,9 @@ class CandleStickRenderObject extends RenderBox {
   void paint(PaintingContext context, Offset offset) {
     double range = (_high - _low) / size.height;
     for (int i = 0; (i + 1) * _candleWidth < size.width; i++) {
-      if (i + _index >= _candles.length || i + _index < 0) continue;
-      var candle = _candles[i + _index];
+      final value = i +_index;
+      if (value >= _candles.length || value < 0) continue;
+      var candle = _candles[value];
       paintCandle(context, offset, i, candle, range);
     }
     _close = _candles[0].close;
