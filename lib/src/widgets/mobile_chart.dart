@@ -86,7 +86,7 @@ class _MobileChartState extends State<MobileChart> {
         final double maxHeight = constraints.maxHeight - DATE_BAR_HEIGHT;
 
         // visible candles start and end indexes
-        final int candlesStartIndex = max(widget.index, 0);
+        int candlesStartIndex = max(widget.index, 0);
         final int candlesEndIndex = min(
             maxWidth ~/ widget.candleWidth + widget.index,
             widget.candles.length - 1);
@@ -101,8 +101,12 @@ class _MobileChartState extends State<MobileChart> {
         double candlesHighPrice = 0;
         double candlesLowPrice = 0;
         if (widget.chartAdjust == ChartAdjust.visibleRange) {
+          final length = candlesEndIndex + 1;
+          if (candlesStartIndex >= widget.candles.length) {
+            candlesStartIndex = 0;
+          }
           List<Candle> inRangeCandles = widget.candles
-              .getRange(candlesStartIndex, candlesEndIndex + 1)
+              .getRange(candlesStartIndex, length)
               .toList();
           candlesHighPrice = inRangeCandles.map((e) => e.high).reduce(max);
           candlesLowPrice = inRangeCandles.map((e) => e.low).reduce(min);
@@ -131,7 +135,7 @@ class _MobileChartState extends State<MobileChart> {
           longPressX = max(longPressX!, 0);
           longPressX = min(longPressX!, maxWidth);
           longPressY = max(longPressY!, 0);
-          longPressX = min(longPressX!, maxHeight);
+          longPressY = min(longPressY!, maxHeight);
         }
 
         return TweenAnimationBuilder(
@@ -173,8 +177,11 @@ class _MobileChartState extends State<MobileChart> {
                                   priceScale: priceScale,
                                   width: constraints.maxWidth,
                                   chartHeight: chartHeight,
-                                  lastCandle: widget.candles[
-                                      widget.index < 0 ? 0 : widget.index],
+                                  // lastCandle: widget.candles[
+                                  //     widget.index < 0 ? 0 : widget.index],
+                                          lastCandle: widget.candles[
+                                              widget.index < 0 ? 0 : (widget.index >= widget.candles.length ? widget.candles.length - 1 : widget.index)],
+
                                   onScale: (delta) {
                                     setState(() {
                                       additionalVerticalPadding += delta;
