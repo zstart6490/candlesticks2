@@ -135,7 +135,7 @@ class _MobileChartState extends State<MobileChart> {
           longPressX = max(longPressX!, 0);
           longPressX = min(longPressX!, maxWidth);
           longPressY = max(longPressY!, 0);
-          longPressY = min(longPressY!, maxHeight);
+          longPressY = min(longPressY!, maxHeight);//
         }
 
         return TweenAnimationBuilder(
